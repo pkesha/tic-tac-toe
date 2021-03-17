@@ -10,7 +10,7 @@ class Game {
     }
 
     initialize() {
-        let blah = this.turns();
+        let thisObject = this;
         console.log("Initialize Method");
         Array.from(this.board.children).forEach((child) => {
             this.boardSquare.push(child);
@@ -18,8 +18,7 @@ class Game {
             this.boardSquare[square].addEventListener('click', function(event) {
                 console.log("ADD EVENT LISTENER");
                 event.preventDefault();
-                //////////////
-                blah(square);
+                thisObject.turns(square);
             });
         });
     };
@@ -41,8 +40,13 @@ class Game {
         } else {
             //throw error
         }
-        //console.log("End of Turns");
     };
+
+    winner() {
+        let diagonals = [-8, -4, 4, 8];
+        let row = [-2, -1, 1, 2];
+        let columns = [-6, -3, 3, 6];
+
 }
 
 game = new Game();
