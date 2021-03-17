@@ -1,5 +1,6 @@
 class Game {
     constructor() {
+        console.log("CREATING NEW GAME OBJECT");
         this.board = document.querySelector(".board");
         this.player1 = true;
         this.player2 = false;
@@ -8,8 +9,24 @@ class Game {
         this.initialize();
     }
 
-    //Will be used to determine who went and which
+    initialize() {
+        let blah = this.turns();
+        console.log("Initialize Method");
+        Array.from(this.board.children).forEach((child) => {
+            this.boardSquare.push(child);
+            let square = this.boardSquare.indexOf(child);
+            this.boardSquare[square].addEventListener('click', function(event) {
+                console.log("ADD EVENT LISTENER");
+                event.preventDefault();
+                //////////////
+                blah(square);
+            });
+        });
+    };
+
+    //Will be used to determine who went and which spot has been selected
     turns(position) {
+        console.log("CALLING TURNS");
         if(this.player1 === true) {
             //Need to store where a player has been used
             this.positionStorage[position] = 1;
@@ -24,22 +41,8 @@ class Game {
         } else {
             //throw error
         }
-        console.log("End of Turns");
-    }
-
-    initialize() {
-        //console.log("Initialize Method");
-        Array.from(this.board.children).forEach((child) => {
-            this.boardSquare.push(child);
-            let square = this.boardSquare.indexOf(child);
-            let turnsCallback = this.turns(square);
-            this.boardSquare[square].addEventListener('click', function(event) {
-                event.preventDefault();
-                //They are not being clicked but still being used
-                turnsCallback;
-            });
-        });
-    }
+        //console.log("End of Turns");
+    };
 }
 
 game = new Game();

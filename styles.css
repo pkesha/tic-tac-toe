@@ -5,9 +5,10 @@
     text-align: center;
 
     display: grid;
-
     grid-template-rows: auto auto auto;
     grid-template-columns: auto auto auto;
+
+    dipsay: 
 }
 
 .board-item {
