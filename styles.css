@@ -1,13 +1,13 @@
 .board{
-    height: 100px;
-    width: 100px;
+    height: 500px;
+    width: 500px;
     margin: auto;
     text-align: center;
 
     display: grid;
+
     grid-template-rows: auto auto auto;
     grid-template-columns: auto auto auto;
-    grid-gap: 10px;
 }
 
 .board-item {
