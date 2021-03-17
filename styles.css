@@ -1,0 +1,11 @@
+.board{
+    display: grid;
+    grid-template-columns: repeat(3, lfr);
+    width: 10px;
+    height: 10px;
+    background: red;
+}
+
+#1{
+    background: aqua;
+}
