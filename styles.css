@@ -1,11 +1,14 @@
+
 .board{
     display: grid;
     grid-template-columns: repeat(3, lfr);
-    width: 10px;
-    height: 10px;
+    width: 100px;
+    height: 100px;
     background: red;
 }
 
 #1{
     background: aqua;
+    width: 20px;
+    height: 20px;
 }
