@@ -11,7 +11,6 @@ class Game {
 
     initialize() {
         let thisObject = this;
-        console.log("Initialize Method");
         Array.from(this.board.children).forEach((child) => {
             this.boardSquare.push(child);
             let square = this.boardSquare.indexOf(child);
@@ -25,22 +24,18 @@ class Game {
 
     //Will be used to determine who went and which spot has been selected
     turns(position) {
-        console.log("CALLING TURNS");
         if(this.player1 === true) {
-            //Need to store where a player has been used
             this.positionStorage[position] = 1;
             console.log(this.positionStorage);
             this.player1 = false;
             this.player2 = true;
             this.checkWinner(1, position);
-            //console.log("player 1");
         } else if (this.player2 === true) {
             this.positionStorage[position] = 2;
             console.log(this.positionStorage);
             this.player1 = true;
             this.player2 = false;
             this.checkWinner(2, position);
-            //console.log("player 2");
         } else {
             //throw error
         }
@@ -78,6 +73,7 @@ class Game {
             }
         }
 
+        
         console.log("D: ", diagonalScore);
         console.log("C: ", columnScore);
         console.log("R: ", rowScore);
