@@ -83,6 +83,7 @@ class Game {
                         this.exitF()
                     }
                 }
+                rowScore = 0;
             }
 
             //Checking columns
@@ -95,6 +96,7 @@ class Game {
                         this.exitF();
                     }
                 }
+                columnScore = 0;
             }
 
             let diagonalArray = diagonals[i];
@@ -106,17 +108,18 @@ class Game {
                         this.exitF();
                     }
                 }
+                diagonalScore = 0;
             }
         }
 
-        if(!this.positionStorage.includes(0)) {
+        if(!this.positionStorage.includes(0)){
             alert("CATS GAME");
         }
 
     }
 
     exitF(){
-
+        location.reload();
     }
 
 }
