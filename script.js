@@ -8,6 +8,7 @@ class Game {
         this.player2 = false;
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        alert('Player 1 go!');
         this.initialize();
     }
 
@@ -25,23 +26,30 @@ class Game {
 
     //Will be used to determine who went and which spot has been selected
     turns(position, child) {
-        if(this.player1 === true) {
-            this.positionStorage[position] = 1;
-            //console.log(this.positionStorage);
-            this.player1 = false;
-            this.player2 = true;
-            child.style.backgroundColor = 'blue';
-            this.checkWinner(1, position);
-        } else if (this.player2 === true) {
-            this.positionStorage[position] = 2;
-            //console.log(this.positionStorage);
-            this.player1 = true;
-            this.player2 = false;
-            child.style.backgroundColor = 'red';
-            this.checkWinner(2, position);
+        if(this.positionStorage[position] == 0){
+            if(this.player1 === true) {
+                this.positionStorage[position] = 1;
+                //console.log(this.positionStorage);
+                this.player1 = false;
+                this.player2 = true;
+                child.style.backgroundColor = 'blue';
+                alert('Player 2 Go!')
+                this.checkWinner(1, position);
+            } else if (this.player2 === true) {
+                this.positionStorage[position] = 2;
+                //console.log(this.positionStorage);
+                this.player1 = true;
+                this.player2 = false;
+                child.style.backgroundColor = 'red';
+                alert('Player 1 Go!')
+                this.checkWinner(2, position);
+            } else {
+                //throw error
+            }
         } else {
-            //throw error
+            alert("Chose a different space");
         }
+
     };
 
     checkWinner(player, postion) {
