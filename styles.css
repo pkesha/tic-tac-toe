@@ -1,7 +1,7 @@
-.board{
-    height: 500px;
-    width: 500px;
-    margin: auto;
+.board {
+    height: 400px;
+    width: 50%;
+    margin: auto auto auto auto;
     text-align: center;
 
     display: grid;
