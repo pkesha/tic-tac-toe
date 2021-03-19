@@ -1,5 +1,8 @@
-//Use APIs
-//Use
+//Use APIs - cat's game!
+//Use players as objects
+//Alerting player moves on webpage, not alert pop-up
+//Make checking winner code more concise - o^2 complexity, repeated code
+//Star Wars theme!!
 
 class Game {
     constructor() {
