@@ -109,22 +109,16 @@ class Game {
             }
         }
 
-        //Reset on win. Prevent changes.  Determine cats game
-        // console.log("D: ", diagonalScore);
-        // console.log("C: ", columnScore);
-        // console.log("R: ", rowScore);
+        if(!this.positionStorage.includes(0)) {
+            alert("CATS GAME");
+        }
+
     }
 
     exitF(){
 
     }
 
-}
-
-class Player {
-    constructor() {
-
-    }
 }
 
 game = new Game();
