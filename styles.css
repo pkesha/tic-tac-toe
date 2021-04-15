@@ -2,7 +2,7 @@ body {
     width: 97vw;
     height: 95vh;
 
-    background-image: url("https://media.comicbook.com/2020/07/star-wars-skywalker-saga-wallpaper-1231363.jpeg?auto=webp&width=1280&height=720&crop=1280:720,smart");
+    background-image: url("indexWallpaper.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     background-position: 0 10px;
@@ -14,14 +14,15 @@ body {
 }
 
 .board {
-    background-color: white;
+    background-color: grey;
+    color: white;
     opacity: 90%;
     text-align: center;
     margin-left: 7.5%;
 
     display: grid;
-    grid-template-rows: 100px 100px  100px;
-    grid-template-columns: 100px 100px 100px;
+    grid-template-rows: 110px 110px  110px;
+    grid-template-columns: 110px 110px 110px;
 }
 
 .board-item {
