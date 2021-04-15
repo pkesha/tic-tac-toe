@@ -14,11 +14,10 @@ body {
 }
 
 .board {
-    background-color: black;
     color: white;
     text-align: center;
     margin-left: 7.5%;
-    opacity: 85%;
+    opacity: 90%;
 
     display: grid;
     grid-template-rows: 110px 110px  110px;
@@ -26,6 +25,13 @@ body {
 }
 
 .board-item {
+    border-radius: 15px 15px 15px 15px;
+    background-color: black;
     border-style: solid;
+}
+
+#turn {
+    align-items: center;
+    justify-content: center;
 }
 

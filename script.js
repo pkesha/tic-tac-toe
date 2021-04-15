@@ -19,7 +19,7 @@ class Game {
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-        this.turn.textContent = "The Jedi Master's Turn"
+        //this.turn.textContent = "The Jedi Master will go first!"
         this.initialize();
     }
 
