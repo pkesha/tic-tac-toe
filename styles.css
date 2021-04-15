@@ -14,8 +14,10 @@ body {
 }
 
 .board {
-    margin: auto;
+    background-color: white;
+    opacity: 90%;
     text-align: center;
+    margin-left: 7.5%;
 
     display: grid;
     grid-template-rows: 100px 100px  100px;

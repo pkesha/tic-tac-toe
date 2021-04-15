@@ -11,7 +11,7 @@ class Game {
         this.player2 = false;
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        alert('Player 1 go!');
+        //alert('Player 1 go!');
         this.initialize();
     }
 
