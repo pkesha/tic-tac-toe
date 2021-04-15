@@ -14,7 +14,7 @@ body {
 }
 
 .board {
-    background-color: grey;
+    background-color: black;
     color: white;
     opacity: 90%;
     text-align: center;
@@ -27,6 +27,7 @@ body {
 
 .board-item {
     border-style: solid;
+    opacity: 100%;
 }
 
 
