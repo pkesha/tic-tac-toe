@@ -1,14 +1,23 @@
+body {
+    width: 97vw;
+    height: 95vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .board {
-    height: 400px;
-    width: 50%;
-    margin: auto auto auto auto;
+    margin: auto;
     text-align: center;
 
     display: grid;
-    grid-template-rows: auto auto auto;
-    grid-template-columns: auto auto auto;
+    grid-template-rows: 100px 100px  100px;
+    grid-template-columns: 100px 100px 100px;
 }
 
 .board-item {
     border-style: solid;
 }
+
+
