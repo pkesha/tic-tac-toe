@@ -1,11 +1,11 @@
 body {
     width: 97vw;
-    height: 95vh;
+    height: 97vh;
 
-    background-image: url("indexWallpaper.jpg");
+    background-image: url("images/indexWallpaper.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    background-position: 0 10px;
+    /*background-position: 0 10px;*/
     background-attachment: fixed;
 
     display: flex;
@@ -16,9 +16,9 @@ body {
 .board {
     background-color: black;
     color: white;
-    opacity: 90%;
     text-align: center;
     margin-left: 7.5%;
+    opacity: 85%;
 
     display: grid;
     grid-template-rows: 110px 110px  110px;
@@ -27,7 +27,5 @@ body {
 
 .board-item {
     border-style: solid;
-    opacity: 100%;
 }
-
 

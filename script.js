@@ -5,24 +5,35 @@
 //Star Wars theme!!
 
 class Game {
+    //Starts the game!
     constructor() {
+        //Selecting variables used without game class
         this.board = document.querySelector(".board");
+        this.turn = document.querySelector("#turn");
+
+        //Initializing player turns
         this.player1 = true;
         this.player2 = false;
+
+        //InitializingGame positions
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        //alert('Player 1 go!');
+
+        this.turn.textContent = "The Jedi Master's Turn"
         this.initialize();
     }
 
     initialize() {
-        let thisObject = this;
+        //Outer scope object will be stored for later use in the anonymous function
+        let thisInitialize = this;
+
         Array.from(this.board.children).forEach((child) => {
+            //"this" is now the referring to the array
             this.boardSquare.push(child);
             let square = this.boardSquare.indexOf(child);
             this.boardSquare[square].addEventListener('click', function(event) {
                 event.preventDefault();
-                thisObject.turns(square,child);
+                thisInitialize.turns(square,child);
             });
         });
     };
@@ -35,8 +46,8 @@ class Game {
                 //console.log(this.positionStorage);
                 this.player1 = false;
                 this.player2 = true;
-                child.style.backgroundColor = 'blue';
-                alert('Player 2 Go!')
+                child.style.backgroundImage = "url(images/jedi.png)";
+                this.turn.textContent = "The Jedi Master's Turn";
                 this.checkWinner(1, position);
             } else if (this.player2 === true) {
                 this.positionStorage[position] = 2;
@@ -44,7 +55,7 @@ class Game {
                 this.player1 = true;
                 this.player2 = false;
                 child.style.backgroundColor = 'red';
-                alert('Player 1 Go!')
+                this.turn.textContent = "The Sith Lord's Turn";
                 this.checkWinner(2, position);
             } else {
                 //throw error

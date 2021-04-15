@@ -6,4 +6,4 @@
 
 Used JavaScript, CSS, and HTML.
 
-![img.png](img.png)
+![img.png](images/img.png)
