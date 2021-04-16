@@ -10,7 +10,6 @@ class Game {
         //Selecting variables used without game class
         this.board = document.querySelector(".board");
         this.turn = document.querySelector("#turn");
-
         //Initializing player turns
         this.player1 = true;
         this.player2 = false;
@@ -21,6 +20,24 @@ class Game {
 
         //this.turn.textContent = "The Jedi Master will go first!"
         this.initialize();
+        let size = "100%"
+        this.jediImageInitialize(size);
+        this.sithImageInitialize(size);
+    }
+
+    jediImageInitialize(size) {
+        this.jedi = document.createElement("img");
+        this.jedi.src = "images/jedi.jpg";
+        this.jedi.style.height = size;
+        this.jedi.style.width = size;
+    }
+
+    sithImageInitialize(size) {
+        this.sith = document.createElement("img");
+        this.sith.src = "images/sith.png";
+        this.sith.style.height = size;
+        this.sith.style.width = size;
+        this.sith.style.margin = "auto auto";
     }
 
     initialize() {
@@ -46,7 +63,7 @@ class Game {
                 //console.log(this.positionStorage);
                 this.player1 = false;
                 this.player2 = true;
-                child.style.backgroundImage = "url(images/jedi.png)";
+                child.append(this.jedi.cloneNode(true));
                 this.turn.textContent = "The Jedi Master's Turn";
                 this.checkWinner(1, position);
             } else if (this.player2 === true) {
@@ -54,7 +71,7 @@ class Game {
                 //console.log(this.positionStorage);
                 this.player1 = true;
                 this.player2 = false;
-                child.style.backgroundColor = 'red';
+                child.append(this.sith.cloneNode(true));
                 this.turn.textContent = "The Sith Lord's Turn";
                 this.checkWinner(2, position);
             } else {
@@ -66,7 +83,7 @@ class Game {
 
     };
 
-    checkWinner(player, postion) {
+    checkWinner(player, position) {
         //Have all these variables available within the entire object
         //pass the variables - run this 3 times in the eventlistener
         //Tracking for wins
@@ -97,7 +114,7 @@ class Game {
 
 
             let rowArray = rows[i];
-            if(rowArray.includes(postion)) {
+            if(rowArray.includes(position)) {
                 for (let j = 0; j < 3; j++) {
                     rowScore += (player === this.positionStorage[rowArray[j]]) ? 1 : 0;
                     if (rowScore === 3) {
@@ -110,7 +127,7 @@ class Game {
 
             //Checking columns
             let columnArray = columns[i];
-            if(columnArray.includes(postion)) {
+            if(columnArray.includes(position)) {
                 for (let j = 0; j < 3; j++) {
                     columnScore += (player === this.positionStorage[columnArray[j]]) ? 1 : 0;
                     if (columnScore === 3) {
@@ -122,7 +139,7 @@ class Game {
             }
 
             let diagonalArray = diagonals[i];
-            if(diagonalArray.includes(postion)) {
+            if(diagonalArray.includes(position)) {
                 for (let j = 0; j < 3; j++) {
                     diagonalScore += (player === this.positionStorage[diagonalArray[j]]) ? 1 : 0;
                     if (diagonalScore === 3) {

@@ -14,7 +14,7 @@ body {
 }
 
 .board {
-    color: white;
+    color: orange;
     text-align: center;
     margin-left: 7.5%;
     opacity: 90%;
@@ -25,9 +25,13 @@ body {
 }
 
 .board-item {
-    border-radius: 15px 15px 15px 15px;
+    /*border-radius: 15px 15px 15px 15px;*/
     background-color: black;
     border-style: solid;
+}
+
+#1 {
+
 }
 
 #turn {
