@@ -9,14 +9,19 @@ body {
     background-attachment: fixed;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+
+.board, #turn {
+    margin-left: 7.5%;
+
 }
 
 .board {
     color: orange;
     text-align: center;
-    margin-left: 7.5%;
     opacity: 90%;
 
     display: grid;
@@ -30,12 +35,17 @@ body {
     border-style: solid;
 }
 
-#1 {
-
-}
-
 #turn {
-    align-items: center;
-    justify-content: center;
+    text-align: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border-style: solid;
 }
 
+@media only screen and (max-width: 699px) {
+    body {
+        background-image: url("images/indexMobileWallpaper.jpg");
+    }
+
+}

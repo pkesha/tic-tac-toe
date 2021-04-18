@@ -1,7 +1,9 @@
 //Use APIs - cat's game!
-//Use players as objects
 
 class Game {
+    //Have all these variables available within the entire object
+    //pass the variables - run this 3 times in the eventlistener
+    //Tracking for wins
     columns = [
         [0, 3, 6],
         [1, 4, 7],
@@ -27,18 +29,12 @@ class Game {
         this.turn = document.querySelector("#turn");
 
         //Initializing player turns
-        this.player1 = true;
-        this.player2 = false;
+        this.sith = false;
+        this.jedi = true;
 
         //InitializingGame positions
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-        //Have all these variables available within the entire object
-        //pass the variables - run this 3 times in the eventlistener
-        //Tracking for wins
-
-
-        //Initializing positions for checking
 
         //this.turn.textContent = "The Jedi Master will go first!"
         this.initialize();
@@ -79,26 +75,27 @@ class Game {
 
     //Changing turns
     changeTurns() {
-        this.player1 = !this.player1;
-        this.player2 = !this.player2;
+        this.sith = !this.sith;
+        this.jedi = !this.jedi;
     }
 
     //Will be used to determine who went and which spot has been selected
     turns(position, child) {
         if (this.positionStorage[position] === 3) {
-            alert("Please start a new Game!")
+            alert("Please start a new Game!");
+            this.turn.textContent = "Refresh for a new Game!";
         } else if (this.positionStorage[position] === 0) {
-            if (this.player1) {
+            if (this.sith) {
                 this.positionStorage[position] = 1;
                 this.changeTurns();
                 child.append(this.jediImage.cloneNode(true));
-                this.turn.textContent = "The Jedi Master's Turn";
+                this.turn.textContent = "The Sith Lord's Turn";
                 this.checkWinner(1, position);
-            } else if (this.player2) {
+            } else if (this.jedi) {
                 this.positionStorage[position] = 2;
                 this.changeTurns();
                 child.append(this.sithImage.cloneNode(true));
-                this.turn.textContent = "The Sith Lord's Turn";
+                this.turn.textContent = "The Jedi Master's Turn";
                 this.checkWinner(2, position);
             }
         } else {
@@ -112,7 +109,7 @@ class Game {
         this.addUp(this.rows, player, position);
         this.addUp(this.diagonals, player, position);
 
-        if (!(this.positionStorage.includes(0) || this.positionStorage.includes(2))) {
+        if (!(this.positionStorage.includes(0) || this.positionStorage.includes(3))) {
             alert("CATS GAME");
         }
 
@@ -120,7 +117,10 @@ class Game {
 
     //Will keep checking - will be useful later for undoing moves and keeping logs
     addUp(pattern, player, position) {
-        console.log(this.positionStorage);
+        let playerName = {
+            1: "Jedi",
+            2: "Sith"
+        };
         let score = 0;
         for (let i = 0; i < 3; i++) {
             //Selecting first element of the array.
@@ -130,16 +130,15 @@ class Game {
                 for (let j = 0; j < 3; j++) {
                     score += (player === this.positionStorage[patternArray[j]]) ? 1 : 0;
                     if (score === 3) {
-                        alert("Player " + player + " is the winner");
+                        alert("The " + playerName[player] + " have won!");
                         this.positionStorage = [3, 3, 3, 3, 3, 3, 3, 3, 3];
+                        this.turn.textContent = "Refresh for a new Game!";
                     }
                 }
                 score = 0;
             }
-
         }
     }
-
 }
 
 game = new Game();
