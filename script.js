@@ -2,6 +2,24 @@
 //Use players as objects
 
 class Game {
+    columns = [
+        [0, 3, 6],
+        [1, 4, 7],
+        [2, 6, 8]
+    ];
+
+    diagonals = [
+        [0, 4, 8],
+        [2, 4, 6],
+        [10, 10, 10]
+    ];
+
+    rows = [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]
+    ];
+
     //Starts the game!
     constructor() {
         //Selecting variables used without game class
@@ -15,6 +33,12 @@ class Game {
         //InitializingGame positions
         this.boardSquare = [];
         this.positionStorage = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        //Have all these variables available within the entire object
+        //pass the variables - run this 3 times in the eventlistener
+        //Tracking for wins
+
+
+        //Initializing positions for checking
 
         //this.turn.textContent = "The Jedi Master will go first!"
         this.initialize();
@@ -45,30 +69,34 @@ class Game {
             this.boardSquare.push(child);
             //square is an int value of index value
             let square = this.boardSquare.indexOf(child);
-            this.boardSquare[square].addEventListener('click', function(event) {
+            this.boardSquare[square].addEventListener('click', function (event) {
                 event.preventDefault();
                 //Each click will call the turns method
                 thisInitialize.turns(square, child);
             });
         });
-    };
+    }
+
+    //Changing turns
+    changeTurns() {
+        this.player1 = !this.player1;
+        this.player2 = !this.player2;
+    }
 
     //Will be used to determine who went and which spot has been selected
     turns(position, child) {
-        if(this.positionStorage[position] == 0){
-            if(this.player1 === true) {
+        if (this.positionStorage[position] === 3) {
+            alert("Please start a new Game!")
+        } else if (this.positionStorage[position] === 0) {
+            if (this.player1) {
                 this.positionStorage[position] = 1;
-                //console.log(this.positionStorage);
-                this.player1 = false;
-                this.player2 = true;
+                this.changeTurns();
                 child.append(this.jediImage.cloneNode(true));
                 this.turn.textContent = "The Jedi Master's Turn";
                 this.checkWinner(1, position);
-            } else if (this.player2 === true) {
+            } else if (this.player2) {
                 this.positionStorage[position] = 2;
-                //console.log(this.positionStorage);
-                this.player1 = true;
-                this.player2 = false;
+                this.changeTurns();
                 child.append(this.sithImage.cloneNode(true));
                 this.turn.textContent = "The Sith Lord's Turn";
                 this.checkWinner(2, position);
@@ -76,37 +104,15 @@ class Game {
         } else {
             alert("Chose a different space");
         }
-
-        //location.reload();
     };
 
     checkWinner(player, position) {
-        //Have all these variables available within the entire object
-        //pass the variables - run this 3 times in the eventlistener
-        //Tracking for wins
-        let columns = [
-            [0, 3, 6],
-            [1, 4, 7],
-            [2, 6, 8]
-        ];
 
-        let diagonals = [
-            [0, 4, 8],
-            [2, 4, 6],
-            [10, 10, 10]
-        ];
+        this.addUp(this.columns, player, position);
+        this.addUp(this.rows, player, position);
+        this.addUp(this.diagonals, player, position);
 
-        let rows = [
-            [0, 1, 2],
-            [3, 4, 5],
-            [6, 7, 8]
-        ];
-
-        this.addUp(columns, player, position);
-        this.addUp(rows, player, position);
-        this.addUp(diagonals, player, position);
-
-        if(!this.positionStorage.includes(0)){
+        if (!(this.positionStorage.includes(0) || this.positionStorage.includes(2))) {
             alert("CATS GAME");
         }
 
@@ -114,8 +120,9 @@ class Game {
 
     //Will keep checking - will be useful later for undoing moves and keeping logs
     addUp(pattern, player, position) {
+        console.log(this.positionStorage);
         let score = 0;
-        for(let i = 0; i < 3; i++) {
+        for (let i = 0; i < 3; i++) {
             //Selecting first element of the array.
             let patternArray = pattern[i];
             //If the pattern includes a position within the second dimension of the array
@@ -124,10 +131,12 @@ class Game {
                     score += (player === this.positionStorage[patternArray[j]]) ? 1 : 0;
                     if (score === 3) {
                         alert("Player " + player + " is the winner");
+                        this.positionStorage = [3, 3, 3, 3, 3, 3, 3, 3, 3];
                     }
                 }
                 score = 0;
             }
+
         }
     }
 
@@ -135,4 +144,3 @@ class Game {
 
 game = new Game();
 game;
-
