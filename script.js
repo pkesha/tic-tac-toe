@@ -1,8 +1,5 @@
 //Use APIs - cat's game!
 //Use players as objects
-//Alerting player moves on webpage, not alert pop-up
-//Make checking winner code more concise - o^2 complexity, repeated code
-//Star Wars theme!!
 
 class Game {
     //Starts the game!
@@ -10,6 +7,7 @@ class Game {
         //Selecting variables used without game class
         this.board = document.querySelector(".board");
         this.turn = document.querySelector("#turn");
+
         //Initializing player turns
         this.player1 = true;
         this.player2 = false;
@@ -20,37 +18,37 @@ class Game {
 
         //this.turn.textContent = "The Jedi Master will go first!"
         this.initialize();
-        let size = "100%"
-        this.jediImageInitialize(size);
-        this.sithImageInitialize(size);
     }
 
-    jediImageInitialize(size) {
-        this.jedi = document.createElement("img");
-        this.jedi.src = "images/jedi.jpg";
-        this.jedi.style.height = size;
-        this.jedi.style.width = size;
-    }
+    pieceInitialize(size) {
+        this.jediImage = document.createElement("img");
+        this.sithImage = document.createElement("img");
 
-    sithImageInitialize(size) {
-        this.sith = document.createElement("img");
-        this.sith.src = "images/sith.png";
-        this.sith.style.height = size;
-        this.sith.style.width = size;
-        this.sith.style.margin = "auto auto";
+        this.jediImage.src = "images/jedi.jpg";
+        this.sithImage.src = "images/sith.png";
+
+        this.jediImage.style.height = size;
+        this.jediImage.style.width = size;
+
+        this.sithImage.style.height = size;
+        this.sithImage.style.width = size;
     }
 
     initialize() {
         //Outer scope object will be stored for later use in the anonymous function
+        this.pieceInitialize('100%');
         let thisInitialize = this;
 
+        //Each square is initialize to respond to 'click' events
         Array.from(this.board.children).forEach((child) => {
             //"this" is now the referring to the array
             this.boardSquare.push(child);
+            //square is an int value of index value
             let square = this.boardSquare.indexOf(child);
             this.boardSquare[square].addEventListener('click', function(event) {
                 event.preventDefault();
-                thisInitialize.turns(square,child);
+                //Each click will call the turns method
+                thisInitialize.turns(square, child);
             });
         });
     };
@@ -63,7 +61,7 @@ class Game {
                 //console.log(this.positionStorage);
                 this.player1 = false;
                 this.player2 = true;
-                child.append(this.jedi.cloneNode(true));
+                child.append(this.jediImage.cloneNode(true));
                 this.turn.textContent = "The Jedi Master's Turn";
                 this.checkWinner(1, position);
             } else if (this.player2 === true) {
@@ -71,26 +69,21 @@ class Game {
                 //console.log(this.positionStorage);
                 this.player1 = true;
                 this.player2 = false;
-                child.append(this.sith.cloneNode(true));
+                child.append(this.sithImage.cloneNode(true));
                 this.turn.textContent = "The Sith Lord's Turn";
                 this.checkWinner(2, position);
-            } else {
-                //throw error
             }
         } else {
             alert("Chose a different space");
         }
 
+        //location.reload();
     };
 
     checkWinner(player, position) {
         //Have all these variables available within the entire object
         //pass the variables - run this 3 times in the eventlistener
         //Tracking for wins
-        let diagonalScore = 0;
-        let rowScore = 0;
-        let columnScore = 0;
-
         let columns = [
             [0, 3, 6],
             [1, 4, 7],
@@ -109,47 +102,9 @@ class Game {
             [6, 7, 8]
         ];
 
-        //High complexity O^2
-        for(let i = 0; i < 3; i++){
-
-
-            let rowArray = rows[i];
-            if(rowArray.includes(position)) {
-                for (let j = 0; j < 3; j++) {
-                    rowScore += (player === this.positionStorage[rowArray[j]]) ? 1 : 0;
-                    if (rowScore === 3) {
-                        alert("Player " + player + " is the winner");
-                        this.exitF()
-                    }
-                }
-                rowScore = 0;
-            }
-
-            //Checking columns
-            let columnArray = columns[i];
-            if(columnArray.includes(position)) {
-                for (let j = 0; j < 3; j++) {
-                    columnScore += (player === this.positionStorage[columnArray[j]]) ? 1 : 0;
-                    if (columnScore === 3) {
-                        alert("Player " + player + " is the winner");
-                        this.exitF();
-                    }
-                }
-                columnScore = 0;
-            }
-
-            let diagonalArray = diagonals[i];
-            if(diagonalArray.includes(position)) {
-                for (let j = 0; j < 3; j++) {
-                    diagonalScore += (player === this.positionStorage[diagonalArray[j]]) ? 1 : 0;
-                    if (diagonalScore === 3) {
-                        alert("Player " + player + " is the winner");
-                        this.exitF();
-                    }
-                }
-                diagonalScore = 0;
-            }
-        }
+        this.addUp(columns, player, position);
+        this.addUp(rows, player, position);
+        this.addUp(diagonals, player, position);
 
         if(!this.positionStorage.includes(0)){
             alert("CATS GAME");
@@ -157,8 +112,23 @@ class Game {
 
     }
 
-    exitF(){
-        location.reload();
+    //Will keep checking - will be useful later for undoing moves and keeping logs
+    addUp(pattern, player, position) {
+        let score = 0;
+        for(let i = 0; i < 3; i++) {
+            //Selecting first element of the array.
+            let patternArray = pattern[i];
+            //If the pattern includes a position within the second dimension of the array
+            if (patternArray.includes(position)) {
+                for (let j = 0; j < 3; j++) {
+                    score += (player === this.positionStorage[patternArray[j]]) ? 1 : 0;
+                    if (score === 3) {
+                        alert("Player " + player + " is the winner");
+                    }
+                }
+                score = 0;
+            }
+        }
     }
 
 }
