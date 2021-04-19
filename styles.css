@@ -5,7 +5,6 @@ body {
     background-image: url("images/indexWallpaper.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
-    /*background-position: 0 10px;*/
     background-attachment: fixed;
 
     display: flex;
@@ -48,4 +47,7 @@ body {
         background-image: url("images/indexMobileWallpaper.jpg");
     }
 
+    .board, #turn {
+        margin-left: 0%;
+    }
 }
