@@ -7,7 +7,7 @@ class Game {
     columns = [
         [0, 3, 6],
         [1, 4, 7],
-        [2, 6, 8]
+        [2, 5, 8]
     ];
 
     diagonals = [
