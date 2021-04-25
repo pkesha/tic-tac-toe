@@ -5,6 +5,8 @@
 - If both players can't get three in a row, column or diagonal it will be a cat's game!
 - Each game will be alerted to a winner, or a cat's game.
 
+To play: https://pkesha.github.io/Tic-Tac-Toe/
+
 Used JavaScript, CSS, and HTML.
 
 ![img.png](images/img.png)
