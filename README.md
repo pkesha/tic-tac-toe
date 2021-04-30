@@ -8,5 +8,3 @@
 To play: https://pkesha.github.io/Tic-Tac-Toe/
 
 Used JavaScript, CSS, and HTML.
-
-![img.png](images/img.png)
